@@ -6,7 +6,6 @@ authors = ["Jan Starke <Jan.Starke@t-systems.com>"]
 description = "Parser and Generator for the famous mactime bodyfile format"
 homepage = "https://www.github.com/janstarke/bodyfile"
 license-file = "LICENSE"
-license="GPLv3"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
