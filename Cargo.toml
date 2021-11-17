@@ -1,6 +1,6 @@
 [package]
 name = "bodyfile"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 authors = ["Jan Starke <Jan.Starke@t-systems.com>"]
 description = "Parser and Generator for the famous mactime bodyfile format"
