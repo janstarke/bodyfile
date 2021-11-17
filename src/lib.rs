@@ -12,11 +12,11 @@
 //! > 1.X and 2.X.
 //! >
 //! > The 3.X output has the following fields:
-//!
+//! >
 //! > ```ignore,no_run
 //! > MD5|name|inode|mode_as_string|UID|GID|size|atime|mtime|ctime|crtime
 //! > ```
-//!
+//! >
 //! > The times are reported in UNIX time format. Lines that start with '#' are
 //! > ignored and treated as comments. In mactime, many of theses fields are
 //! > optional. Its only requirement is that at least one of the time values is
