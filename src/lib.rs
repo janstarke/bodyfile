@@ -3,11 +3,11 @@ pub use bodyfile3::*;
 
 #[cfg(test)]
 mod tests {
-    use super::Bodyfile3;
+    use super::Bodyfile3Line;
 
     #[test]
     fn sample1() {
-        let bf = Bodyfile3::new();
+        let bf = Bodyfile3Line::new();
         assert_eq!(bf.get_md5(), "0");
     }
 }
