@@ -76,6 +76,35 @@ impl Bodyfile3Line {
         }
     }
 
+    /// create a new bodyfile line with concrete values
+    /// 
+    /// # Example
+    /// ```
+    /// use bodyfile::Bodyfile3Line;
+    /// 
+    /// let bf = Bodyfile3Line::from_values(
+    ///                 "4bad420da66571dac7f1ace995cc55c6".to_owned(),
+    ///                 "sample.txt".to_owned(),
+    ///                 "87915-128-1".to_owned(),
+    ///                 "r/rrwxrwxrwx".to_owned(),
+    ///                 1003,
+    ///                 500,
+    ///                 126378,
+    ///                 12341,
+    ///                 12342,
+    ///                 12343,
+    ///                 12344);
+    /// assert_eq!(bf.get_md5(), "4bad420da66571dac7f1ace995cc55c6");
+    /// assert_eq!(bf.get_name(), "sample.txt");
+    /// assert_eq!(bf.get_inode(), "87915-128-1");
+    /// assert_eq!(bf.get_mode(), "r/rrwxrwxrwx");
+    /// assert_eq!(bf.get_uid(), 1003);
+    /// assert_eq!(bf.get_gid(), 500);
+    /// assert_eq!(bf.get_size(), 126378);
+    /// assert_eq!(bf.get_atime(), 12341);
+    /// assert_eq!(bf.get_mtime(), 12342);
+    /// assert_eq!(bf.get_ctime(), 12343);
+    /// assert_eq!(bf.get_crtime(), 12344);
     pub fn from_values(
         md5: String,
         name: String,
@@ -104,16 +133,29 @@ impl Bodyfile3Line {
     }
 
     #[duplicate(
+        method_name attribute_name;
+        [with_md5]    [md5];
+        [with_name]   [name];
+        [with_inode]  [inode];
+        [with_mode]   [mode_as_string];
+    )]
+    pub fn method_name(mut self, attribute_name: &str) -> Self {
+        self.attribute_name = attribute_name.to_owned();
+        self
+    }
+
+    #[duplicate(
         method_name attribute_name attribute_type;
-        [with_md5]    [md5]            [String];
-        [with_name]   [name]           [String];
-        [with_inode]  [inode]          [String];
-        [with_mode]   [mode_as_string] [String];
+        [with_owned_md5]    [md5]            [String];
+        [with_owned_name]   [name]           [String];
+        [with_owned_inode]  [inode]          [String];
+        [with_owned_mode]   [mode_as_string] [String];
         [with_uid]    [uid]            [i64];
         [with_gid]    [gid]            [i64];
         [with_size]   [size]           [i64];
         [with_atime]  [atime]          [i64];
-        [with_mtine]  [mtime]          [i64];
+        [with_mtime]  [mtime]          [i64];
+        [with_ctime]  [ctime]          [i64];
         [with_crtime] [crtime]         [i64];
     )]
     pub fn method_name(mut self, attribute_name: attribute_type) -> Self {
@@ -148,9 +190,30 @@ impl Bodyfile3Line {
 }
 
 impl ToString for Bodyfile3Line {
+    /// exports the line to the format parsable by, eg. `mactime`
+    /// 
+    /// # Example
+    /// ```
+    /// use bodyfile::Bodyfile3Line;
+    /// 
+    /// let bf = Bodyfile3Line::new()
+    ///             .with_md5("4bad420da66571dac7f1ace995cc55c6")
+    ///             .with_name("sample.txt")
+    ///             .with_inode("87915-128-1")
+    ///             .with_mode("r/rrwxrwxrwx")
+    ///             .with_uid(1003)
+    ///             .with_gid(500)
+    ///             .with_size(126378)
+    ///             .with_atime(12341)
+    ///             .with_mtime(12342)
+    ///             .with_ctime(12343)
+    ///             .with_crtime(12344);
+    /// let line = bf.to_string();
+    /// assert_eq!(line, "4bad420da66571dac7f1ace995cc55c6|sample.txt|87915-128-1|r/rrwxrwxrwx|1003|500|126378|12341|12342|12343|12344")
+    /// ```
     fn to_string(&self) -> String {
         format!(
-            "{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}\n",
+            "{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}",
             self.md5,
             self.name,
             self.inode,
