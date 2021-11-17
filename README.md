@@ -1,3 +1,7 @@
+![Crates.io](https://img.shields.io/crates/v/bodyfile)
+![Crates.io (latest)](https://img.shields.io/crates/dv/bodyfile)
+![Codecov](https://img.shields.io/codecov/c/github/janstarke/bodyfile)
+
 # bodyfile
 Parser and Generator for the famous `mactime` bodyfile format
 
