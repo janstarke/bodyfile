@@ -12,3 +12,6 @@ license="GPLv3"
 
 [dependencies]
 duplicate = "0.3"
+
+[dev-dependencies]
+matches = "0.1"
