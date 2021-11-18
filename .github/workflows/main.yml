@@ -20,6 +20,7 @@ jobs:
         uses: actions-rs/tarpaulin@v0.1
         with:
           version: '0.15.0'
+          run-types: Doctests
           args: '-- --test-threads 1'
 
       - name: Upload to codecov.io
