@@ -33,7 +33,22 @@
 //! let str_line = "0|/Users/Administrator ($FILE_NAME)|93552-48-2|d/drwxrwxrwx|0|0|92|1577092511|1577092511|1577092511|-1";
 //! let bf_line = Bodyfile3Line::try_from(str_line).unwrap();
 //! assert_eq!(str_line, bf_line.to_string());
-//! ``` 
+//! ```
+//! 
+//! # Handling of pipes
+//! Normally, a filename should not contain a pipe symbol (|), but if 
+//! [bodyfile] is being used together with other sources, this may happen. So we 
+//! need to be able to handle this also:
+//! 
+//! ```
+//! use bodyfile::Bodyfile3Line;
+//! use std::convert::TryFrom;
+//! 
+//! let str_line = "0|command was ls -l | wc |93552-48-2|d/drwxrwxrwx|0|0|92|1577092511|1577092511|1577092511|-1";
+//! let bf_line = Bodyfile3Line::try_from(str_line).unwrap();
+//! assert_eq!(str_line, bf_line.to_string());
+//! ```
+//! 
 pub mod bodyfile3;
 pub use bodyfile3::*;
 
