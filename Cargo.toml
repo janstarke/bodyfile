@@ -1,6 +1,6 @@
 [package]
 name = "bodyfile"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2018"
 authors = ["Jan Starke <Jan.Starke@t-systems.com>"]
 description = "Parser and Generator for the famous mactime bodyfile format"
@@ -11,8 +11,6 @@ license-file = "LICENSE"
 
 [dependencies]
 duplicate = "0.3"
-regex = "1.5"
-lazy_static = "1.4"
 
 [dev-dependencies]
 matches = "0.1"
